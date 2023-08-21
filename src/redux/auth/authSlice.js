@@ -1,9 +1,9 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {userLogin} from './authActions';
-import {getUserData, removeUserData} from '../../services/asyncStorage';
+
 const initialState = {
   loading: false,
-  userInfo: getUserData() ? getUserData() : null,
+  userInfo: null, // Initialize userInfo with null
   error: null,
   success: false,
 };
@@ -13,7 +13,6 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     logout: state => {
-      removeUserData(); // deletes token from storage
       state.loading = false;
       state.userInfo = null;
       state.error = null;
@@ -36,6 +35,6 @@ const authSlice = createSlice({
       });
   },
 });
-// export actions
+
 export const {logout} = authSlice.actions;
 export default authSlice.reducer;

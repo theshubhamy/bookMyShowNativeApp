@@ -12,7 +12,7 @@ const LoginScreen = () => {
 
   return (
     <View>
-      <Button title="Login with Google" onPress={() => handleGoogleLogin()} />
+      <Button title="Login with Google" onPress={handleGoogleLogin} />
     </View>
   );
 };

@@ -1,22 +1,23 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {auth, googleProvider} from '../../services/firebase';
 import {saveUserData} from '../../services/asyncStorage';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import {googleProvider, auth} from '../../services/firebase';
+
 export const userLogin = createAsyncThunk(
-  'userLogin',
+  'auth/userLogin',
   async (_, {rejectWithValue}) => {
     try {
-      // make request to backend
-      const response = await await auth.signInWithPopup(googleProvider);
-      // store user's token in local storage
-      saveUserData(response.user);
-      return response?.user;
+      const {idToken} = await GoogleSignin.signIn(googleProvider);
+      // Create a Google credential with the token
+      const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+      // Sign-in the user with the credential
+      console.log(googleCredential);
+      const res = auth().signInWithCredential(googleCredential);
+      console.log(res);
+      await saveUserData(res);
+      return res;
     } catch (error) {
-      // return custom error message from API if any
-      if (error.response && error.response.data.message) {
-        return rejectWithValue(error.response.data.message);
-      } else {
-        return rejectWithValue(error.message);
-      }
+      return rejectWithValue(error.message);
     }
   },
 );

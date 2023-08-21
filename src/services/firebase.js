@@ -1,16 +1,23 @@
 import {initializeApp} from 'firebase/app';
 import {getAuth, GoogleAuthProvider} from 'firebase/auth';
 import {getFirestore} from 'firebase/firestore';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyAhDO3QNjHpOKODBoBrLUeMaMxwpTbIqNY',
-  authDomain: 'bookmyshownativeapp.firebaseapp.com',
-  projectId: 'bookmyshownativeapp',
-  storageBucket: 'bookmyshownativeapp.appspot.com',
-  messagingSenderId: '637998895633',
-  appId: '1:637998895633:web:96a0681a6e2d61fe5dd7b0',
-  measurementId: 'G-4Y5BEMNQMC',
+  apiKey: 'YOUR_API_KEY',
+  authDomain: 'YOUR_AUTH_DOMAIN',
+  projectId: 'YOUR_PROJECT_ID',
+  storageBucket: 'YOUR_STORAGE_BUCKET',
+  messagingSenderId: 'YOUR_MESSAGING_SENDER_ID',
+  appId: 'YOUR_APP_ID',
+  measurementId: 'YOUR_MEASUREMENT_ID',
 };
+
+GoogleSignin.configure({
+  offlineAccess: true,
+  webClientId:
+    '637998895633-6uv08ltrhidfd4f92kg84bukkb2ue6qe.apps.googleusercontent.com', // Obtain this from Firebase Console
+});
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);

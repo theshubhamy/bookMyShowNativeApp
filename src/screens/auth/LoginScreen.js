@@ -1,13 +1,13 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { View, Button } from "react-native";
-import { loginWithGoogleAndStoreData } from "../../redux/auth/authActions";
+import React from 'react';
+import {useDispatch} from 'react-redux';
+import {View, Button} from 'react-native';
+import {userLogin} from '../../redux/auth/authActions';
 
 const LoginScreen = () => {
   const dispatch = useDispatch();
 
   const handleGoogleLogin = () => {
-    dispatch(loginWithGoogleAndStoreData());
+    dispatch(userLogin());
   };
 
   return (
